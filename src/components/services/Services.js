@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './services.css';
 import { BsCheckLg } from 'react-icons/bs';
 import axios from 'axios';
+import baseUrl from '../../config';
 
 function Services() {
   const [serviceDetails, setServiceDetails] = useState({ status: null, serviceDetails: [] });
@@ -10,7 +11,7 @@ function Services() {
   useEffect(() => {
     async function getServiceDetails() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/details/service");
+        const response = await axios.get(`${baseUrl}api/details/service`);
         console.log("Service details:", response.data);
         setServiceDetails(response.data);
         // Concatenate all fieldOfService values into a single string
@@ -31,7 +32,7 @@ function Services() {
   useEffect(() => {
     async function getService() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/service");
+        const response = await axios.get(`${baseUrl}api/service`);
         console.log("Service:", response.data);
         setService(response.data.service);
         // Concatenate all fieldOfService values into a single string

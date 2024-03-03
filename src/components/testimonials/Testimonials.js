@@ -2,6 +2,7 @@ import React from 'react'
 import './testimonials.css'
 import { useState, useEffect } from 'react'
 import axios, { Axios } from 'axios'
+import baseUrl from '../../config'
 
 // import Swiper core and required modules
 import { Pagination } from 'swiper';
@@ -18,7 +19,7 @@ function Testimonials() {
   useEffect(() => {
     async function getTestimonial() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/testimonial")
+        const response = await axios.get(`${baseUrl}api/testimonial`)
         console.log(response.data)
         setTestimonial(response.data.testimonial)
       } catch (error) {
@@ -43,7 +44,7 @@ function Testimonials() {
             return (
               <SwiperSlide key={i} className='testimonial'>
                 <div className='client__avatar'>
-                  <img src={`http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/${testimonial.avatar}`} alt=''></img>
+                  <img src={`${baseUrl}${testimonial.avatar}`} alt=''></img>
                 </div>
                 <h5 className='client__name'>{testimonial.name}</h5>
                 <small className='client__review'>{testimonial.review}</small>

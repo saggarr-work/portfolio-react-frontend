@@ -7,13 +7,14 @@ import { useRef } from 'react';
 import emailjs from 'emailjs-com'
 import { useState, useEffect } from 'react'
 import axios, { Axios } from 'axios'
+import baseUrl from '../../config'
 
 function Contact() {
   const [contact, setContact] = useState([])
   useEffect(() => {
     async function getContact() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/contact")
+        const response = await axios.get(`${baseUrl}api/contact`)
         console.log(response.data);
         setContact(response.data.contact[0]);
 

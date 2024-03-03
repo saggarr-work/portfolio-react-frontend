@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './experience.css';
 import { BsPatchCheckFill } from 'react-icons/bs';
 import axios from 'axios';
+import baseUrl from '../../config';
 
 function Experience() {
   const [experienceDetails, setExperienceDetails] = useState([]);
@@ -10,7 +11,7 @@ function Experience() {
   useEffect(() => {
     async function getExperienceDetails() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/details/experience");
+        const response = await axios.get(`${baseUrl}api/details/experience`);
         console.log("Experience Details:", response.data);
         setExperienceDetails(response.data.experienceDetails);
 
@@ -32,7 +33,7 @@ function Experience() {
   useEffect(() => {
     async function getExperience() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/experience");
+        const response = await axios.get(`${baseUrl}api/experience`);
         console.log("Experience:", response.data);
         setExperience(response.data.experience);
   

@@ -2,6 +2,7 @@ import React from 'react'
 import './portfolio.css'
 import { useState, useEffect } from 'react'
 import axios, { Axios } from 'axios'
+import baseUrl from '../../config'
 
 
 function Portfolio() {
@@ -9,7 +10,7 @@ function Portfolio() {
   useEffect(() => {
     async function getPortfolio() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/portfolio")
+        const response = await axios.get(`${baseUrl}api/portfolio`)
         console.log(response.data);
         setPortfolio(response.data.portfolio);
         
@@ -48,7 +49,7 @@ function Portfolio() {
             return (
               <article key={i} className='portfolio__item'>
                 <div className='portfolio__item-image'>
-                  <img src={`http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/${portfolio.thumbnail}`} alt={portfolio.title}></img>
+                  <img src={`${baseUrl}${portfolio.thumbnail}`} alt={portfolio.title}></img>
                 </div>
                 <h3>{portfolio.title}</h3>
                 <div className='portfolio__item-cta'>

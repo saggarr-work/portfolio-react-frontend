@@ -4,13 +4,14 @@ import CTA from './CTA'
 import HeaderSocials from './HeaderSocials'
 import { useState, useEffect } from 'react'
 import axios, { Axios } from 'axios'
+import baseUrl from '../../config'
 
 function Header() {
   const [header, setHeader] = useState([])
   useEffect(() => {
     async function getHeader() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/header");
+        const response = await axios.get(`${baseUrl}api/header`);
         console.log(header.data);
         setHeader(response.data.header[0]);
 
@@ -43,7 +44,7 @@ function Header() {
         <HeaderSocials></HeaderSocials>
 
         <div className='me'>
-          <img src={`http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/${header.photo}`} height="300" width="100" alt='me' />
+          <img src={`${baseUrl}${header.photo}`} height="300" width="100" alt='me' />
         </div>
 
         <a href='#contact' className='scroll__down'>Scroll Down</a>

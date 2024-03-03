@@ -1,18 +1,19 @@
 import React from 'react'
 import './about.css'
-import ME from '../../assets/me-about.jpg'
+// import ME from '../../assets/me-about.jpg'
 import { FaAward } from 'react-icons/fa'
 import { FiUsers } from 'react-icons/fi'
 import { VscFolderLibrary } from 'react-icons/vsc'
 import { useState, useEffect } from 'react'
 import axios, { Axios } from 'axios'
+import baseUrl from '../../config'
 
 function About() {
   const [about, setAbout] = useState([])
   useEffect(() => {
     async function getAbout() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/about");
+        const response = await axios.get(`${baseUrl}api/about`);
         console.log(response.data);
         setAbout(response.data.about[0]);
 
@@ -34,7 +35,7 @@ function About() {
       <div className='container about__container'>
         <div className='about__me'>
           <div className='about__me-image'>
-            <img src={`http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/${about.photo}`} alt='About_Image'></img>
+            <img src={`${baseUrl}${about.photo}`} alt='About_Image'></img>
           </div>
         </div>
         <div className='about__content'>
