@@ -12,11 +12,16 @@ function About() {
   useEffect(() => {
     async function getAbout() {
       try {
-        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/about")
-        console.log(about.data)
-        setAbout(response.data.about[0])
+        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/about");
+        console.log(response.data);
+        setAbout(response.data.about[0]);
+
+        // fetching data for metadata
+        const description = response.data.about[0].description;
+        // showing metadata in the head 
+        document.querySelector('meta[name="description"]').content = description;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
     getAbout()

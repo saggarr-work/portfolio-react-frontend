@@ -1,88 +1,99 @@
-import React from 'react'
-import './services.css'
-import {BsCheckLg} from 'react-icons/bs'
+import React, { useState, useEffect } from 'react';
+import './services.css';
+import { BsCheckLg } from 'react-icons/bs';
+import axios from 'axios';
 
 function Services() {
+  const [serviceDetails, setServiceDetails] = useState({ status: null, serviceDetails: [] });
+  const [service, setService] = useState([]);
+
+  useEffect(() => {
+    async function getServiceDetails() {
+      try {
+        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/details/service");
+        console.log("Service details:", response.data);
+        setServiceDetails(response.data);
+        // Concatenate all fieldOfService values into a single string
+        const allserviceDetails = response.data.serviceDetails.map(exp => exp.description).join(', ');
+
+        // Set the concatenated string as the content of the meta tag
+        const metaTag = document.querySelector('meta[name="service-description"]');
+        if (metaTag) {
+          metaTag.content = allserviceDetails;
+        }
+      } catch (error) {
+        console.error("Error fetching service details:", error);
+      }
+    }
+    getServiceDetails();
+  }, []);
+
+  useEffect(() => {
+    async function getService() {
+      try {
+        const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/service");
+        console.log("Service:", response.data);
+        setService(response.data.service);
+        // Concatenate all fieldOfService values into a single string
+        const allservices = response.data.service.map(exp => exp.fieldOfService).join(', ');
+
+        // Set the concatenated string as the content of the meta tag
+        const metaTag = document.querySelector('meta[name="service"]');
+        if (metaTag) {
+          metaTag.content = allservices;
+        }
+      } catch (error) {
+        console.error("Error fetching service:", error);
+      }
+    }
+    getService();
+  }, []);
+
+  // Function to get fieldOfService based on service_id
+  const getFieldOfService = (serviceId) => {
+    const matchingService = service.find(exp => exp.id === serviceId);
+    return matchingService ? matchingService.fieldOfService : "Unknown";
+  };
+
+  // Group services by service_id
+  const groupedServices = serviceDetails.serviceDetails.reduce((acc, exp) => {
+    if (!acc[exp.service_id]) {
+      acc[exp.service_id] = {
+        name: getFieldOfService(exp.service_id) || "Unknown",
+        services: [exp],
+      };
+    } else {
+      acc[exp.service_id].services.push(exp);
+    }
+    return acc;
+  }, {});
+
+  console.log("Grouped Services:", groupedServices);
+
   return (
     <section id='services'>
       <h5>What I Offer</h5>
       <h2>Services</h2>
 
       <div className='container services__container'>
-
-        <article className='service'>
-          <div className='service__head'>
-            <h3>FrontEnd</h3>
-          </div>
-          <ul className='service__list'>
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Website Design:</b> I provide website design services that prioritize user experience and create a visually appealing interface that captures the brand's essence. I strive to create designs that align with your brand's values and mission.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>HTML, CSS, and JavaScript Development:</b> I utilize HTML, CSS, and JavaScript to create high-quality front-end user interfaces that work well on any device. I pay attention to details, such as responsive design, typography, and accessibility, to ensure that the user interface is user-friendly, and easy to use.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Frontend Frameworks and Libraries:</b> I utilize popular frontend frameworks and libraries such as React, Vue.js, and Angular to create responsive and dynamic user interfaces that are robust, performant, and scalable. This also enables me to streamline the development process and deliver high-quality solutions in a timely manner.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Cross-Browser Compatibility:</b> I ensure that websites and web applications I develop are compatible with all major browsers and devices, ensuring a seamless user experience for all visitors. This helps improve your website's search engine ranking and increases your website's overall reach.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Performance Optimization:</b> I focus on creating websites and web applications that are optimized for fast load times, and low page size. I make use of best practices such as code minification, image optimization, and caching to improve the website's overall performance.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Accessibility:</b> I create accessible user interfaces that cater to users with disabilities. This includes the use of semantic HTML, ARIA tags, and ensuring compliance with the Web Content Accessibility Guidelines (WCAG).</p>
-            </li>
-          </ul>
-        </article>
-        {/* END OF WEB DEV */}
-
-        <article className='service'>
-          <div className='service__head'>
-            <h3>BackEnd</h3>
-          </div>
-          <ul className='service__list'>
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>API Development:</b> I specialize in developing robust and scalable RESTful APIs that can be used to power a wide range of web and mobile applications. I make use of popular frameworks such as Node.js, Django, and Ruby on Rails to create APIs that are easy to use and integrate.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Database Design and Management:</b> I am experienced in designing and managing databases that can handle large amounts of data while ensuring data integrity and security. I work with popular databases such as MySQL, PostgreSQL, and MongoDB to design data models and implement data access patterns that are efficient and scalable.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Server-Side Frameworks:</b> I work with popular server-side frameworks such as Laravel, Express.js, and Flask to build web applications and APIs that are robust and scalable. I ensure that the applications I develop are optimized for performance and security, and can handle high levels of traffic.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Security and Authentication:</b> I specialize in implementing robust security measures to protect web applications and APIs from cyber threats. I use techniques such as secure password storage, encryption, and two-factor authentication to ensure that data is kept safe and secure.</p>
-            </li>
-
-            <li>
-              <BsCheckLg className='service__list-icon'/>
-              <p><b>Cloud Services:</b> I am experienced in working with cloud platforms such as Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform. I can help set up and configure cloud-based solutions such as virtual machines, databases, and web servers, to ensure that your application is scalable and highly available.</p>
-            </li>
-          </ul>
-        </article>
-        {/* END OF CONTENT CREATION */}
+        {Object.keys(groupedServices).map((serviceId, i) => (
+          <article key={i} className='service'>
+            <div className='service__head'>
+              <h3>{groupedServices[serviceId].name}</h3>
+            </div>
+            <ul className='service__list'>
+              {groupedServices[serviceId].services.map((exp, j) => (
+                <li key={j}>
+                  <BsCheckLg className='service__list-icon' />
+                  <p><b>{exp.heading}:</b> {exp.description}</p>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </div>
     </section>
-  )
+  );
 }
 
-export default Services
+export default Services;

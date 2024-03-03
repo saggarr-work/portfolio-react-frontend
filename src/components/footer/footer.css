@@ -52,6 +52,10 @@ footer a {
     color: var(--color-bg);
 }
 
+.footer__copyright__name{
+    color: var(--color-copyright);
+}
+
 /* ================ MEDIA QURIES (SMALL DEVICES)  ==================*/
 @media screen and (max-width: 600px) {
     .permalinks {

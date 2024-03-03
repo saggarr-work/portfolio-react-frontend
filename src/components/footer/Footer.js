@@ -2,7 +2,6 @@ import React from 'react'
 import './footer.css'
 import { FaFacebookF } from 'react-icons/fa'
 import { FaInstagram } from 'react-icons/fa'
-import { FaTelegramPlane } from 'react-icons/fa'
 import { FaWhatsapp } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
 import axios, { Axios } from 'axios'
@@ -23,7 +22,7 @@ function Footer() {
   }, [])
   return (
     <footer>
-      <a href='#' className='footer__logo'><span id='first'>{header.fullName}</span><span id='second'> (sagar)</span></a>
+      <a href='#' className='footer__logo'><span id='first'>{header.fullName}</span></a>
       <ul className='permalinks'>
         <li><a href='#'>Home</a></li>
         <li><a href='#about'>About</a></li>
@@ -42,7 +41,7 @@ function Footer() {
 
       {/* autometic copyright date genarator */}
       <div className='footer__copyright'>
-        <small>&copy; {header.fullName} (sagar). All rights reserved. 2022 - {new Date().getFullYear()}</small>
+        <small>&copy; Developed by <a className='footer__copyright__name' href='https://saggarr.com/' target='_blank'>Avijit Biswas (Sagar)</a> &#128530; . All rights reserved. 2022 - {new Date().getFullYear()}</small>
       </div>
     </footer>
   )

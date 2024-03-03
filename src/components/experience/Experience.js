@@ -13,6 +13,15 @@ function Experience() {
         const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/details/experience");
         console.log("Experience Details:", response.data);
         setExperienceDetails(response.data.experienceDetails);
+
+        // Concatenate all languageOrTools values into a single string
+        const allExperienceDetails = response.data.experienceDetails.map(exp => exp.languageOrTools).join(', ');
+  
+        // Set the concatenated string as the content of the meta tag
+        const metaTag = document.querySelector('meta[name="experience-details"]');
+        if (metaTag) {
+          metaTag.content = allExperienceDetails;
+        }
       } catch (error) {
         console.error("Error fetching experience details:", error);
       }
@@ -26,6 +35,15 @@ function Experience() {
         const response = await axios.get("http://localhost/portfolio-app/backend/portfolio-admin-paenl/public/api/experience");
         console.log("Experience:", response.data);
         setExperience(response.data.experience);
+  
+        // Concatenate all fieldOfExperience values into a single string
+        const allExperiences = response.data.experience.map(exp => exp.fieldOfExperience).join(', ');
+  
+        // Set the concatenated string as the content of the meta tag
+        const metaTag = document.querySelector('meta[name="experience"]');
+        if (metaTag) {
+          metaTag.content = allExperiences;
+        }
       } catch (error) {
         console.error("Error fetching experience:", error);
       }
