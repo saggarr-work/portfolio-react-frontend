@@ -12,7 +12,7 @@ function Services() {
     async function getServiceDetails() {
       try {
         const response = await axios.get(`${baseUrl}api/details/service`);
-        console.log("Service details:", response.data);
+        // console.log("Service details:", response.data);
         setServiceDetails(response.data);
         // Concatenate all fieldOfService values into a single string
         const allserviceDetails = response.data.serviceDetails.map(exp => exp.description).join(', ');
@@ -33,7 +33,7 @@ function Services() {
     async function getService() {
       try {
         const response = await axios.get(`${baseUrl}api/service`);
-        console.log("Service:", response.data);
+        // console.log("Service:", response.data);
         setService(response.data.service);
         // Concatenate all fieldOfService values into a single string
         const allservices = response.data.service.map(exp => exp.fieldOfService).join(', ');
@@ -69,7 +69,7 @@ function Services() {
     return acc;
   }, {});
 
-  console.log("Grouped Services:", groupedServices);
+  // console.log("Grouped Services:", groupedServices);
 
   return (
     <section id='services'>

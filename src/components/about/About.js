@@ -14,7 +14,7 @@ function About() {
     async function getAbout() {
       try {
         const response = await axios.get(`${baseUrl}api/about`);
-        console.log(response.data);
+        // console.log(response.data);
         setAbout(response.data.about[0]);
 
         // fetching data for metadata

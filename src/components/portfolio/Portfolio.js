@@ -11,7 +11,7 @@ function Portfolio() {
     async function getPortfolio() {
       try {
         const response = await axios.get(`${baseUrl}api/portfolio`)
-        console.log(response.data);
+        // console.log(response.data);
         setPortfolio(response.data.portfolio);
         
         // Concatenate all languageOrTools values into a single string

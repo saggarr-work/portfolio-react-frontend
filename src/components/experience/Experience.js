@@ -12,7 +12,7 @@ function Experience() {
     async function getExperienceDetails() {
       try {
         const response = await axios.get(`${baseUrl}api/details/experience`);
-        console.log("Experience Details:", response.data);
+        // console.log("Experience Details:", response.data);
         setExperienceDetails(response.data.experienceDetails);
 
         // Concatenate all languageOrTools values into a single string
@@ -34,7 +34,7 @@ function Experience() {
     async function getExperience() {
       try {
         const response = await axios.get(`${baseUrl}api/experience`);
-        console.log("Experience:", response.data);
+        // console.log("Experience:", response.data);
         setExperience(response.data.experience);
   
         // Concatenate all fieldOfExperience values into a single string
@@ -71,7 +71,7 @@ function Experience() {
     return acc;
   }, {});
 
-  console.log("Grouped Experiences:", groupedExperiences);
+  // console.log("Grouped Experiences:", groupedExperiences);
 
   return (
     <section id='experience'>

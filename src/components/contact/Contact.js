@@ -15,7 +15,7 @@ function Contact() {
     async function getContact() {
       try {
         const response = await axios.get(`${baseUrl}api/contact`)
-        console.log(response.data);
+        // console.log(response.data);
         setContact(response.data.contact[0]);
 
         // fetching data for metadata 

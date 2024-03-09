@@ -12,7 +12,7 @@ function Header() {
     async function getHeader() {
       try {
         const response = await axios.get(`${baseUrl}api/header`);
-        console.log(header.data);
+        // console.log(header.data);
         setHeader(response.data.header[0]);
 
         document.title = response.data.header[0].fullName;
@@ -44,7 +44,7 @@ function Header() {
         <HeaderSocials></HeaderSocials>
 
         <div className='me'>
-          <img src={`${baseUrl}${header.photo}`} height="300" width="100" alt='me' />
+          <img src={`${baseUrl}${header.photo}`} alt='me' />
         </div>
 
         <a href='#contact' className='scroll__down'>Scroll Down</a>

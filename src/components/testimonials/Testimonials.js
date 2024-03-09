@@ -20,7 +20,7 @@ function Testimonials() {
     async function getTestimonial() {
       try {
         const response = await axios.get(`${baseUrl}api/testimonial`)
-        console.log(response.data)
+        // console.log(response.data)
         setTestimonial(response.data.testimonial)
       } catch (error) {
         console.log(error)

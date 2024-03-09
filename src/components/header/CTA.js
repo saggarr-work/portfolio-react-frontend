@@ -10,7 +10,7 @@ function CTA() {
     async function getHeader() {
       try {
         const response = await axios.get(`${baseUrl}api/header`)
-        console.log(header.data)
+        // console.log(header.data)
         setHeader(response.data.header[0])
       } catch (error) {
         console.log(error)
