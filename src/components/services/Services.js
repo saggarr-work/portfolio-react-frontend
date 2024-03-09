@@ -86,7 +86,7 @@ function Services() {
               {groupedServices[serviceId].services.map((exp, j) => (
                 <li key={j}>
                   <BsCheckLg className='service__list-icon' />
-                  <p><b>{exp.heading}:</b> {exp.description}</p>
+                  <p><b>{exp.heading}:</b> <span dangerouslySetInnerHTML={{ __html: exp.description }} /></p>
                 </li>
               ))}
             </ul>

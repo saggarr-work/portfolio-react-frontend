@@ -47,7 +47,7 @@ function Testimonials() {
                   <img src={`${baseUrl}${testimonial.avatar}`} alt=''></img>
                 </div>
                 <h5 className='client__name'>{testimonial.name}</h5>
-                <small className='client__review'>{testimonial.review}</small>
+                <small className='client__review'><span dangerouslySetInnerHTML={{ __html: testimonial.review }} /></small>
               </SwiperSlide>
             )
           })

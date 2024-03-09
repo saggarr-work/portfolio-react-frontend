@@ -51,7 +51,7 @@ function Portfolio() {
                 <div className='portfolio__item-image'>
                   <img src={`${baseUrl}${portfolio.thumbnail}`} alt={portfolio.title}></img>
                 </div>
-                <h3>{portfolio.title}</h3>
+                <h3><span dangerouslySetInnerHTML={{ __html: portfolio.title }} /></h3>
                 <div className='portfolio__item-cta'>
                   <a href={portfolio.githubLink} className='btn' target='blank'>Github</a>
                   <a href={portfolio.liveDemo} className='btn btn-primary' target='blank'>Live Demo</a>

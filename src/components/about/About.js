@@ -59,7 +59,7 @@ function About() {
             </article>
           </div>
 
-          <p>{about.description}</p>
+          <p><span dangerouslySetInnerHTML={{ __html: about.description }} /></p>
 
           <a href='#contact' className='btn btn-primary'> Let's Talk</a>
         </div>
