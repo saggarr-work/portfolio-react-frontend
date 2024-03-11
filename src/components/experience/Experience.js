@@ -52,11 +52,14 @@ function Experience() {
     getExperience();
   }, []);
 
-  // Function to get fieldOfExperience based on experience_id
   const getFieldOfExperience = (experienceId) => {
-    const matchingExperience = experience.find(exp => exp.id === experienceId);
+    const matchingExperience = experience.find(exp => {
+      return String(exp.id) === experienceId;
+    });
     return matchingExperience ? matchingExperience.fieldOfExperience : "Unknown";
   };
+  
+  
 
   // Group experiences by experience_id
   const groupedExperiences = experienceDetails.reduce((acc, exp) => {

@@ -12,12 +12,12 @@ function Services() {
     async function getServiceDetails() {
       try {
         const response = await axios.get(`${baseUrl}api/details/service`);
-        // console.log("Service details:", response.data);
+        // Log the fetched data
+        console.log("Service Details Data:", response.data);
+
         setServiceDetails(response.data);
-        // Concatenate all fieldOfService values into a single string
         const allserviceDetails = response.data.serviceDetails.map(exp => exp.description).join(', ');
 
-        // Set the concatenated string as the content of the meta tag
         const metaTag = document.querySelector('meta[name="service-description"]');
         if (metaTag) {
           metaTag.content = allserviceDetails;
@@ -33,12 +33,12 @@ function Services() {
     async function getService() {
       try {
         const response = await axios.get(`${baseUrl}api/service`);
-        // console.log("Service:", response.data);
+        // Log the fetched data
+        console.log("Service Data:", response.data);
+
         setService(response.data.service);
-        // Concatenate all fieldOfService values into a single string
         const allservices = response.data.service.map(exp => exp.fieldOfService).join(', ');
 
-        // Set the concatenated string as the content of the meta tag
         const metaTag = document.querySelector('meta[name="service"]');
         if (metaTag) {
           metaTag.content = allservices;
@@ -50,13 +50,14 @@ function Services() {
     getService();
   }, []);
 
-  // Function to get fieldOfService based on service_id
   const getFieldOfService = (serviceId) => {
-    const matchingService = service.find(exp => exp.id === serviceId);
+    const matchingService = service.find(exp => {
+      return String(exp.id) === serviceId;
+    });
     return matchingService ? matchingService.fieldOfService : "Unknown";
   };
+  
 
-  // Group services by service_id
   const groupedServices = serviceDetails.serviceDetails.reduce((acc, exp) => {
     if (!acc[exp.service_id]) {
       acc[exp.service_id] = {
@@ -68,8 +69,6 @@ function Services() {
     }
     return acc;
   }, {});
-
-  // console.log("Grouped Services:", groupedServices);
 
   return (
     <section id='services'>
